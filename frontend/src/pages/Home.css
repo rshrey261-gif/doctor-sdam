@@ -1,14 +1,105 @@
+/* Home.css */
+
 .home-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0D9488 0%, #1E40AF 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  margin-top: 100px;
+  padding: 2rem;
+  color: #FFFFFF;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .home-container h1 {
-  color: #00308f;
-  font-size: 32px;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.5px;
 }
 
 .home-container p {
-  font-size: 18px;
-  color: #555;
+  font-size: 1.4rem;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  line-height: 1.6;
+  opacity: 0.95;
+  font-weight: 400;
+}
+
+/* Optional CTA Button (you can add later) */
+.home-container .cta-button {
+  background-color: #60A5FA;
+  color: white;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 16px rgba(96, 165, 250, 0.3);
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+
+.home-container .cta-button:hover {
+  background-color: #3B82F6;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.4);
+}
+
+.home-container .cta-button:active {
+  transform: translateY(-1px);
+}
+
+/* Subtle animated background effect */
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(13, 148, 136, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .home-container h1 {
+    font-size: 2.8rem;
+  }
+
+  .home-container p {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .home-container .cta-button {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 1.5rem;
+  }
+
+  .home-container h1 {
+    font-size: 2.3rem;
+  }
+
+  .home-container p {
+    font-size: 1.1rem;
+  }
 }
