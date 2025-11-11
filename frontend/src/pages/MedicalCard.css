@@ -1,0 +1,64 @@
+.medical-card-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.medical-card-container h2 {
+  text-align: center;
+  color: #00308F;
+  margin-bottom: 20px;
+}
+
+.medical-info p {
+  font-size: 16px;
+  margin: 6px 0;
+}
+
+.history-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.history-list li {
+  background: #eaf3ff;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.prescription-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.prescription-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.download-btn {
+  background-color: #00308F;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.download-btn:hover {
+  background-color: #0C3B2E;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+}

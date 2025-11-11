@@ -48,3 +48,56 @@ button {
 button:hover {
   background-color: #001f66;
 }
+
+.success-banner {
+  background: #e6ffee;
+  color: #006633;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+}
+.status-badge.pending { background: #f0ad4e; }
+.status-badge.confirmed { background: #0275d8; }
+.status-badge.completed { background: #5cb85c; }
+.status-badge.cancelled { background: #d9534f; }
+
+.appointment-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.appointment-card.past {
+  background: #fafafa;
+}
+
+.appointment-info p {
+  margin: 4px 0;
+}
+
+.appointment-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+.download-btn {
+  text-decoration: none;
+  background: #00308f;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.download-btn:hover {
+  background: #002070;
+}

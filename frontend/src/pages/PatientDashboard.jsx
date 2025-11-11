@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Dashboard.css";
 
 function PatientDashboard() {
@@ -16,17 +16,22 @@ function PatientDashboard() {
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const successMsg = location.state?.successMsg;
 
-  // Fetch patient data
+  // Fetch all patient data
   useEffect(() => {
     const fetchPatientData = async () => {
       try {
-        const res1 = await axios.get("/appointments/patient");
-        const res2 = await axios.get("/prescriptions/my");
-        const res3 = await axios.post("/medical/generate-card");
-        setAppointments(res1.data);
-        setPrescriptions(res2.data);
-        setMedicalCard(res3.data.id);
+        const [apptRes, presRes, cardRes] = await Promise.all([
+          axios.get("/appointments/patient"),
+          axios.get("/prescriptions/my"),
+          axios.post("/medical/generate-card"),
+        ]);
+
+        setAppointments(apptRes.data || []);
+        setPrescriptions(presRes.data || []);
+        setMedicalCard(cardRes.data.id || "Generating...");
       } catch (err) {
         console.error("Error loading patient data", err);
       }
@@ -34,7 +39,7 @@ function PatientDashboard() {
     fetchPatientData();
   }, []);
 
-  // Fetch doctors based on filters
+  // Search doctors
   const fetchDoctors = async () => {
     setLoading(true);
     try {
@@ -43,51 +48,87 @@ function PatientDashboard() {
       setDoctors(res.data.results || []);
     } catch (err) {
       console.error("Error fetching doctors:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  const handleFilterChange = (e) => {
+  const handleFilterChange = (e) =>
     setFilters({ ...filters, [e.target.name]: e.target.value });
-  };
 
   const handleSearch = (e) => {
     e.preventDefault();
     fetchDoctors();
   };
 
+  // Separate appointments logically
+  const now = new Date();
+  const upcoming = appointments.filter((a) => {
+    const date = new Date(a.date);
+    return (
+      (a.status === "pending" || a.status === "confirmed") &&
+      date >= now
+    );
+  });
+
+  const past = appointments.filter((a) => {
+    const date = new Date(a.date);
+    return (
+      (a.status === "completed" || a.status === "cancelled") ||
+      date < now
+    );
+  });
+
+  // Match prescriptions to appointments
+  const getPrescription = (appointmentId) =>
+    prescriptions.find((p) => p.appointmentId === appointmentId);
+
   return (
     <div className="dashboard-container patient-dash">
       <h2>Welcome, Patient 👤</h2>
 
-      {/* Medical Card */}
+      {successMsg && (
+        <div className="success-banner">
+          <p>✅ {successMsg}</p>
+        </div>
+      )}
+
+      {/* MEDICAL CARD */}
       <div className="dashboard-section card-section">
-        <h3>Medical Card</h3>
-        <p>Your Card ID: <b>{medicalCard || "Generating..."}</b></p>
+        <h3>🩺 Medical Card</h3>
+        <p>
+          Card ID: <b>{medicalCard}</b>
+        </p>
+        <button
+          onClick={() => navigate("/medical-card")}
+          className="secondary-btn"
+        >
+          View Full History
+        </button>
       </div>
 
-      {/* Search Doctors */}
+      {/* SEARCH DOCTORS */}
       <div className="dashboard-section search-section">
-        <h3>Find Doctors 🩺</h3>
+        <h3>Find Doctors</h3>
         <form onSubmit={handleSearch} className="filter-form">
           <input
             type="text"
             name="name"
-            placeholder="Search by name"
+            placeholder="Name"
             value={filters.name}
             onChange={handleFilterChange}
           />
           <input
             type="text"
             name="specialty"
-            placeholder="Search by specialty"
+            placeholder="Specialty"
             value={filters.specialty}
             onChange={handleFilterChange}
           />
           <input
             type="text"
             name="location"
-            placeholder="Search by location"
+            placeholder="Location"
             value={filters.location}
             onChange={handleFilterChange}
           />
@@ -112,18 +153,15 @@ function PatientDashboard() {
               doctors.map((doc) => (
                 <div className="doctor-card" key={doc._id}>
                   <h3>{doc.userId?.name}</h3>
-                  <p><b>Specialty:</b> {doc.specialization}</p>
-                  <p><b>Location:</b> {doc.location}</p>
-                  <p><b>Experience:</b> {doc.experience} yrs</p>
+                  <p><b>Specialty:</b> {doc.specialization || "N/A"}</p>
+                  <p><b>Location:</b> {doc.location || "N/A"}</p>
+                  <p><b>Experience:</b> {doc.experience || 0} yrs</p>
                   <p><b>Rating:</b> ⭐ {doc.rating || "N/A"}</p>
                   <div className="doctor-card-actions">
                     <button
                       onClick={() =>
                         navigate("/book-appointment", {
-                          state: {
-                            doctorId: doc._id,
-                            doctorName: doc.userId?.name,
-                          },
+                          state: { doctorId: doc._id, doctorName: doc.userId?.name },
                         })
                       }
                     >
@@ -133,10 +171,7 @@ function PatientDashboard() {
                       className="secondary-btn"
                       onClick={() =>
                         navigate("/doctor-reviews", {
-                          state: {
-                            doctorId: doc._id,
-                            doctorName: doc.userId?.name,
-                          },
+                          state: { doctorId: doc._id, doctorName: doc.userId?.name },
                         })
                       }
                     >
@@ -150,37 +185,63 @@ function PatientDashboard() {
         )}
       </div>
 
-      {/* Appointments */}
+      {/* UPCOMING APPOINTMENTS */}
       <div className="dashboard-section">
-        <h3>Upcoming Appointments</h3>
-        {appointments.length === 0 ? (
-          <p>No appointments yet.</p>
+        <h3>📅 Upcoming Appointments</h3>
+        {upcoming.length === 0 ? (
+          <p>No upcoming appointments.</p>
         ) : (
-          <ul>
-            {appointments.map((a) => (
-              <li key={a._id}>
-                {a.doctorId?.userId?.name} — {a.date} at {a.time} ({a.status})
-              </li>
+          <div className="appointment-list">
+            {upcoming.map((a) => (
+              <div key={a._id} className="appointment-card">
+                <p><b>Doctor:</b> {a.doctorId?.userId?.name}</p>
+                <p><b>Date:</b> {a.date}</p>
+                <p><b>Time:</b> {a.time}</p>
+                <span className={`status-badge ${a.status}`}>
+                  {a.status.toUpperCase()}
+                </span>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
 
-      {/* Prescriptions */}
+      {/* PAST APPOINTMENTS */}
       <div className="dashboard-section">
-        <h3>Prescriptions</h3>
-        {prescriptions.length === 0 ? (
-          <p>No prescriptions available.</p>
+        <h3>🕒 Past Appointments & Prescriptions</h3>
+        {past.length === 0 ? (
+          <p>No past appointments.</p>
         ) : (
-          <ul>
-            {prescriptions.map((p) => (
-              <li key={p._id}>
-                <a href={p.pdfLink} target="_blank" rel="noreferrer">
-                  Download Prescription
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="appointment-list">
+            {past.map((a) => {
+              const p = getPrescription(a._id);
+              return (
+                <div key={a._id} className="appointment-card past">
+                  <p><b>Doctor:</b> {a.doctorId?.userId?.name}</p>
+                  <p><b>Date:</b> {a.date}</p>
+                  <p><b>Status:</b> {a.status}</p>
+                  <div className="appointment-actions">
+                    {p?.pdfLink && (
+                      <a
+                        href={p.pdfLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="download-btn"
+                      >
+                        📄 Download Prescription
+                      </a>
+                    )}
+                    <button
+                      className="secondary-btn"
+                      onClick={() => navigate("/medical-card")}
+                    >
+                      View Medical Card
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         )}
       </div>
     </div>

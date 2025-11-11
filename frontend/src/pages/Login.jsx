@@ -9,6 +9,7 @@ function Login() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    // ✅ Fixed typo: setFormDat1a → setFormData
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 

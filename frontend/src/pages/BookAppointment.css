@@ -1,43 +1,54 @@
 .book-container {
-  width: 400px;
-  margin: 100px auto;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
+  max-width: 400px;
+  margin: 60px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .book-container h2 {
   color: #00308f;
+  margin-bottom: 20px;
 }
 
 .book-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+}
+
+.book-form label {
+  font-weight: 600;
+  text-align: left;
 }
 
 .book-form input {
-  padding: 10px;
-  border-radius: 5px;
+  padding: 8px;
   border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-button {
-  background-color: #0c3b2e;
+.book-form button {
+  background: #0c3b2e;
   color: white;
   border: none;
+  border-radius: 8px;
   padding: 10px;
-  border-radius: 6px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-button:hover {
-  background-color: #095c45;
+.book-form button:hover {
+  background: #005f40;
 }
 
 .book-message {
-  margin-top: 10px;
-  color: #00308f;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.doctor-name {
+  color: #0c3b2e;
 }

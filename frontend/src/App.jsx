@@ -12,6 +12,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 import DoctorList from "./pages/DoctorList";
 import BookAppointment from "./pages/BookAppointment";
+import MedicalCard from "./pages/MedicalCard";
 
 export default function App() {
   console.log("APP render start");
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/doctors" element={<DoctorList />} />
+          <Route path="/medical-card" element={<MedicalCard />} />
 <Route path="/book-appointment" element={<BookAppointment />} />
 
 

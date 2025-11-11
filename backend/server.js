@@ -14,6 +14,7 @@ import { fileURLToPath } from "url";
 import prescriptionRoutes from "./routes/prescriptionRoutes.js";
 import medicalRoutes from "./routes/medicalRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 
 
@@ -29,6 +30,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/doctors", doctorRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/doctor", doctorRoutes);
 app.use("/api/patients", patientRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/doctors", searchRoutes);

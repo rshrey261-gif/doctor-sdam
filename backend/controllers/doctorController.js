@@ -54,3 +54,44 @@ export const getDoctorProfile = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// @desc  Add availability slot
+// @route POST /api/doctor/slots
+// @access Private (doctor)
+export const addSlot = async (req, res) => {
+  try {
+    const doctor = await Doctor.findOne({ userId: req.user._id });
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found for this user" });
+    }
+
+    const { date, time } = req.body;
+    if (!date || !time) {
+      return res.status(400).json({ message: "Date and time required" });
+    }
+
+    doctor.availableSlots.push({ date, time });
+    await doctor.save();
+
+    return res.status(200).json({ message: "Slot added successfully" });
+  } catch (err) {
+    console.error("Error adding slot:", err);
+    return res.status(500).json({ message: "Server error adding slot" });
+  }
+};
+
+// @desc  Get availability slots
+// @route GET /api/doctor/slots
+// @access Private (doctor)
+export const getSlots = async (req, res) => {
+  try {
+    const doctor = await Doctor.findOne({ userId: req.user._id });
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+    return res.status(200).json(doctor.availableSlots || []);
+  } catch (err) {
+    console.error("Error fetching slots:", err);
+    return res.status(500).json({ message: "Error fetching slots" });
+  }
+};
