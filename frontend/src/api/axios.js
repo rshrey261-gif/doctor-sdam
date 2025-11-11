@@ -2,7 +2,9 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL:
-    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api", // ✅ Works for both Render & local
+    window.location.hostname === "localhost"
+      ? "http://localhost:5000/api" // ✅ Local backend (for dev)
+      : "https://doctor-sdam.onrender.com/api", // ✅ Render backend (for production)
 });
 
 // ✅ Automatically attach JWT token if available
