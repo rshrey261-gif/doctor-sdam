@@ -1,6 +1,384 @@
-/* src/index.css */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  color-scheme: light;
+
+  --color-bg: #f4f8fb;
+  --color-bg-muted: #e8f1f7;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f9fcff;
+  --color-surface-soft: rgba(255, 255, 255, 0.72);
+
+  --color-primary-700: #134f85;
+  --color-primary-600: #1866a5;
+  --color-primary-500: #2a86c6;
+  --color-primary-100: #d6ecfb;
+  --color-secondary-600: #1e8a84;
+  --color-secondary-400: #40b4ad;
+  --color-secondary-100: #d5f2ee;
+  --color-accent-500: #f7b857;
+
+  --color-text-900: #0f1f33;
+  --color-text-700: #264057;
+  --color-text-500: #4a5f73;
+  --color-text-300: #7d91a3;
+  --color-text-inverse: #ffffff;
+
+  --color-success-500: #1d9d74;
+  --color-warning-500: #d38a1d;
+  --color-danger-500: #c55353;
+
+  --radius-sm: 0.65rem;
+  --radius-md: 0.9rem;
+  --radius-lg: 1.3rem;
+  --radius-xl: 1.8rem;
+  --button-radius: 999px;
+
+  --shadow-xs: 0 2px 6px rgba(15, 63, 100, 0.08);
+  --shadow-sm: 0 10px 24px rgba(15, 76, 129, 0.08);
+  --shadow-md: 0 18px 45px rgba(13, 55, 94, 0.12);
+  --shadow-lg: 0 32px 70px rgba(11, 40, 70, 0.16);
+
+  --focus-ring: 0 0 0 4px rgba(40, 116, 176, 0.25);
+  --transition-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 140ms ease-out;
+
+  --container-max-width: 1200px;
+  --button-height: 3rem;
+  --button-padding-inline: 1.6rem;
+
+  --font-family-base: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+    "Roboto", "Helvetica Neue", sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size-base);
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
+  background: radial-gradient(circle at 10% 20%, rgba(63, 180, 173, 0.08), transparent 45%),
+    radial-gradient(circle at 90% 10%, rgba(40, 116, 176, 0.1), transparent 50%),
+    var(--color-bg);
+  color: var(--color-text-700);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  min-height: 100vh;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(135deg, rgba(24, 102, 165, 0.15), transparent 60%);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+main {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 2vw + 1rem, 3rem) clamp(1rem, 5vw, 3rem);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text-900);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75em;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0 0 1rem;
+  color: var(--color-text-500);
+}
+
+small,
+.text-sm {
+  font-size: 0.875rem;
+  color: var(--color-text-300);
+}
+
+a {
+  color: var(--color-primary-600);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  font-weight: 500;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-primary-700);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+button {
+  border: none;
+  background-color: var(--color-primary-600);
+  color: var(--color-text-inverse);
+  font-weight: 600;
+  border-radius: var(--button-radius);
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-base),
+    background-color var(--transition-fast);
+  box-shadow: var(--shadow-xs);
+  min-height: var(--button-height);
+  padding-inline: var(--button-padding-inline);
+  padding-block: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  letter-spacing: 0.045em;
+}
+
+button:hover:not(:disabled),
+button:focus-visible {
+  background-color: var(--color-primary-700);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-xs);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(40, 116, 176, 0.18);
+  background-color: var(--color-surface);
+  color: var(--color-text-700);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-300);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-primary-600);
+  box-shadow: var(--focus-ring);
+  background-color: var(--color-surface-alt);
+  transform: translateY(-1px);
+}
+
+label {
+  font-weight: 600;
+  color: var(--color-text-700);
+  margin-bottom: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+:where(
+    button,
+    .logout-btn,
+    .secondary-btn,
+    .download-btn,
+    .home-container .cta-button,
+    .doctor-card button,
+    .doctor-card-actions button,
+    .appointment-actions button,
+    .appointment-actions .download-btn,
+    .appointment-actions .secondary-btn,
+    .book-form button,
+    .review-form button,
+    .login-form button,
+    .signup-form button,
+    .slot-form button,
+    .prescription-form button,
+    .inline-prescription-form button,
+    .add-medicine-btn,
+    .actions button,
+    .reject-btn
+  ) {
+  min-height: var(--button-height);
+  padding-inline: var(--button-padding-inline);
+  padding-block: 0;
+  border-radius: var(--button-radius);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  text-decoration: none;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 2vw + 1rem, 2rem);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(19, 79, 133, 0.07);
+  transition: transform var(--transition-base), box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(24, 102, 165, 0.16);
+}
+
+.glass-card {
+  background: var(--color-surface-soft);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-600);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.section-title {
+  margin-bottom: 1.25rem;
+  font-size: clamp(1.35rem, 1.2vw + 1rem, 2rem);
+}
+
+.muted {
+  color: var(--color-text-300);
+}
+
+.surface-muted {
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-lg);
+  padding: clamp(1rem, 1.5vw + 0.75rem, 1.75rem);
+}
+
+.elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.fade-in {
+  animation: fade-in-up 380ms var(--transition-base) both;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.7rem;
+  height: 0.7rem;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(19, 79, 133, 0.08);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(24, 102, 165, 0.45);
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(24, 102, 165, 0.7);
 }

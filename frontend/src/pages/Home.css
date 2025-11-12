@@ -1,111 +1,100 @@
 /* Home.css */
 
 .home-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0D9488 0%, #1E40AF 100%);
+  flex: 1;
+  width: 100%;
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  /* keep generous vertical spacing but allow horizontal shrink on small screens */
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 6rem 3vw;
-  position: relative; /* ensure ::before covers this container only */
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 6vw, 4.5rem);
+  position: relative;
   overflow: hidden;
-  color: #FFFFFF;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-text-inverse);
+}
+
+.home-container::before,
+.home-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(
+      135deg,
+      rgba(24, 102, 165, 0.92) 0%,
+      rgba(31, 138, 132, 0.88) 45%,
+      rgba(19, 79, 133, 0.92) 100%
+    ),
+    radial-gradient(ellipse at top right, rgba(240, 184, 87, 0.25), transparent 60%);
+}
+
+.home-container::after {
+  z-index: -1;
+  opacity: 0.55;
+  background: radial-gradient(circle at 10% 80%, rgba(255, 255, 255, 0.22), transparent 55%),
+    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.18), transparent 60%);
+  filter: blur(0.6px);
 }
 
 .home-container h1 {
-  font-size: 3.5rem;
+  max-width: 18ch;
+  font-size: clamp(2.4rem, 4vw + 1rem, 3.6rem);
   font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  letter-spacing: -0.5px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-shadow: 0 18px 40px rgba(13, 39, 63, 0.28);
 }
 
 .home-container p {
-  font-size: 1.4rem;
-  margin-bottom: 2.5rem;
-  max-width: 700px;
-  line-height: 1.6;
-  opacity: 0.95;
-  font-weight: 400;
+  max-width: clamp(32ch, 60vw, 58ch);
+  font-size: clamp(1.05rem, 0.9vw + 1rem, 1.35rem);
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  line-height: 1.75;
 }
 
-/* Optional CTA Button (you can add later) */
 .home-container .cta-button {
-  background-color: #60A5FA;
-  color: white;
-  padding: 0.9rem 2.2rem;
-  font-size: 1.1rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.82));
+  color: var(--color-primary-600);
+  border-radius: var(--button-radius);
+  font-size: 1rem;
   font-weight: 600;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 16px rgba(96, 165, 250, 0.3);
-  text-transform: none;
-  letter-spacing: 0.3px;
+  box-shadow: 0 18px 36px rgba(12, 45, 68, 0.22);
+  transition: transform var(--transition-base), box-shadow var(--transition-base),
+    color var(--transition-fast);
 }
 
-.home-container .cta-button:hover {
-  background-color: #3B82F6;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.4);
+.home-container .cta-button:hover,
+.home-container .cta-button:focus-visible {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 28px 60px rgba(10, 36, 56, 0.28);
+  color: var(--color-primary-700);
 }
 
 .home-container .cta-button:active {
   transform: translateY(-1px);
 }
 
-/* Subtle animated background effect */
-.home-container::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(13, 148, 136, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.15) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.home-container > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Responsive Adjustments */
 @media (max-width: 768px) {
-  .home-container h1 {
-    font-size: 2.8rem;
-  }
-
-  .home-container p {
-    font-size: 1.2rem;
-    padding: 0 1rem;
-  }
-
-  .home-container .cta-button {
-    padding: 0.8rem 1.8rem;
-    font-size: 1rem;
+  .home-container {
+    padding-block: clamp(2rem, 12vw, 4rem);
+    padding-inline: clamp(1.25rem, 8vw, 3rem);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
   .home-container {
-    padding: 1.5rem;
+    padding-inline: 1.25rem;
   }
 
   .home-container h1 {
-    font-size: 2.3rem;
+    font-size: clamp(2rem, 8vw, 2.6rem);
   }
 
   .home-container p {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }

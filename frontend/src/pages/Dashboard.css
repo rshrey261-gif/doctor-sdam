@@ -1,72 +1,37 @@
-/* Dashboard.css - Teal/Blue-Green Theme for Patient Dashboard */
+/* Dashboard.css */
 
-/* Color Palette */
-:root {
-  --teal-primary: #14b8a6;        /* Teal/Blue-Green - Main Accent */
-  --white: #ffffff;              /* White */
-  --light-blue: #bfdbfe;         /* Light Blue - Buttons */
-  --darker-blue: #1e40af;        /* Darker Blue - Headings, Accents */
-  --gray-light: #f3f4f6;         /* Light Gray - Backgrounds */
-  --gray-medium: #9ca3af;        /* Medium Gray - Text, borders */
-  --gray-dark: #4b5563;          /* Dark Gray - Secondary text */
-  --success-green: #10b981;      /* For success messages */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --border-radius: 12px;
-  --transition: all 0.2s ease;
-}
-
-/* Reset & Base */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9fafb;
-  color: var(--gray-dark);
-  line-height: 1.6;
-}
-
-/* Main Container */
 .dashboard-container {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 2rem 3vw;
-  background-color: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  border: none;
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 3.5rem);
+  background: linear-gradient(135deg, rgba(24, 102, 165, 0.05), rgba(31, 138, 132, 0.07));
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(24, 102, 165, 0.08);
+  box-shadow: var(--shadow-sm);
+  margin-inline: auto;
+  width: min(100%, 1120px);
+  animation: fade-in-up 480ms var(--transition-base) both;
 }
 
 .patient-dash h2 {
-  font-size: 2rem;
-  color: var(--darker-blue);
-  margin-bottom: 1.5rem;
+  margin: 0;
+  font-size: clamp(1.8rem, 2vw + 1rem, 2.35rem);
+  color: var(--color-primary-600);
   text-align: center;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  display: grid;
+  place-items: center;
+  gap: 0.4rem;
 }
 
-/* Success Banner */
 .success-banner {
-  background-color: rgba(16, 185, 129, 0.1);
-  border: 1px solid var(--success-green);
-  color: var(--success-green);
-  padding: 0.75rem 1rem;
-  border-radius: var(--border-radius);
-  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, rgba(29, 157, 116, 0.12), rgba(63, 180, 173, 0.16));
+  border: 1px solid rgba(29, 157, 116, 0.35);
+  color: var(--color-success-500);
+  padding: clamp(0.85rem, 2vw, 1.1rem);
+  border-radius: var(--radius-md);
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
+  box-shadow: 0 18px 36px rgba(29, 157, 116, 0.16);
 }
 
 .success-banner p {
@@ -74,169 +39,122 @@ body {
   font-size: 1rem;
 }
 
-/* Dashboard Sections */
 .dashboard-section {
-  background-color: var(--gray-light);
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  margin-bottom: 1.5rem;
-  border: 1px solid #e5e7eb;
-  transition: var(--transition);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  border: 1px solid rgba(24, 102, 165, 0.08);
+  box-shadow: var(--shadow-xs);
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.35rem);
+  transition: transform var(--transition-base), box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
 .dashboard-section:hover {
+  transform: translateY(-4px);
+  border-color: rgba(24, 102, 165, 0.16);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .dashboard-section h3 {
-  font-size: 1.35rem;
-  color: var(--darker-blue);
-  margin-bottom: 1rem;
-  font-weight: 600;
+  margin: 0;
+  font-size: clamp(1.25rem, 1.1vw + 1rem, 1.6rem);
+  color: var(--color-text-900);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
-/* Medical Card Section */
+.dashboard-section h3::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(24, 102, 165, 0.25), transparent 90%);
+  margin-left: auto;
+}
+
 .card-section p {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: var(--gray-dark);
+  font-size: 1rem;
+  margin: 0;
+  color: var(--color-text-500);
 }
 
 .card-section b {
-  color: var(--teal-primary);
+  color: var(--color-primary-600);
   font-weight: 600;
 }
 
-/* Buttons - General */
-button,
-.secondary-btn,
-.download-btn {
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: var(--transition);
-  font-size: 0.95rem;
-  border: none;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-}
-
-button {
-  background-color: var(--light-blue);
-  color: var(--darker-blue);
-  font-weight: 600;
-}
-
-button:hover {
-  background-color: #93c5fd;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-}
-
-.secondary-btn {
-  background-color: transparent;
-  color: var(--teal-primary);
-  border: 2px solid var(--teal-primary);
-}
-
-.secondary-btn:hover {
-  background-color: rgba(20, 184, 166, 0.1);
-  color: var(--darker-blue);
-}
-
-/* Download Button */
-.download-btn {
-  background-color: var(--teal-primary);
-  color: white;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  border-radius: 6px;
-}
-
-.download-btn:hover {
-  background-color: #0d9488;
-  transform: translateY(-1px);
-}
-
-/* Filter Form */
 .filter-form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(0.75rem, 2vw, 1rem);
+  align-items: end;
 }
 
 .filter-form input,
 .filter-form select {
-  padding: 0.65rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  background-color: white;
-  transition: var(--transition);
+  background: var(--color-surface-alt);
+  border: 1px solid rgba(24, 102, 165, 0.15);
+  border-radius: var(--radius-sm);
+  transition: border var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.filter-form input:focus,
-.filter-form select:focus {
-  outline: none;
-  border-color: var(--teal-primary);
-  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+.filter-form input:focus-visible,
+.filter-form select:focus-visible {
+  box-shadow: var(--focus-ring);
 }
 
 .filter-form button {
-  grid-column: span 1;
-  align-self: end;
+  justify-self: flex-start;
+  padding-inline: var(--button-padding-inline);
 }
 
-/* Doctor Grid */
 .doctor-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1.1rem, 2.5vw, 1.6rem);
 }
 
 .doctor-card {
-  background-color: var(--white);
-  padding: 1.25rem;
-  border-radius: var(--border-radius);
-  border: 1px solid #e5e7eb;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(24, 102, 165, 0.12);
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  box-shadow: var(--shadow-xs);
+  display: grid;
+  gap: 0.65rem;
+  transition: transform var(--transition-base), box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
 .doctor-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--teal-primary);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(24, 102, 165, 0.24);
 }
 
 .doctor-card h3 {
+  margin: 0;
   font-size: 1.2rem;
-  color: var(--darker-blue);
-  margin-bottom: 0.75rem;
+  color: var(--color-text-900);
 }
 
 .doctor-card p {
+  margin: 0;
   font-size: 0.95rem;
-  color: var(--gray-dark);
-  margin-bottom: 0.5rem;
+  color: var(--color-text-500);
 }
 
 .doctor-card p b {
-  color: var(--teal-primary);
+  color: var(--color-secondary-600);
 }
 
 .doctor-card-actions {
   display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
   flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
 }
 
 .doctor-card-actions button {
@@ -244,105 +162,133 @@ button:hover {
   min-width: 120px;
 }
 
-/* Appointment List */
 .appointment-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.25rem);
 }
 
 .appointment-card {
-  background-color: var(--white);
-  padding: 1.25rem;
-  border-radius: var(--border-radius);
-  border-left: 5px solid var(--teal-primary);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  border-left: 6px solid var(--color-primary-600);
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .appointment-card:hover {
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
 }
 
 .appointment-card.past {
-  border-left-color: var(--gray-medium);
-  opacity: 0.95;
+  border-left-color: rgba(74, 95, 115, 0.45);
+  opacity: 0.92;
 }
 
 .appointment-card p {
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.4rem;
   font-size: 0.95rem;
+  color: var(--color-text-500);
 }
 
 .appointment-card b {
-  color: var(--darker-blue);
+  color: var(--color-text-900);
 }
 
-/* Status Badge */
 .status-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .status-badge.pending {
-  background-color: #fef3c7;
-  color: #d97706;
+  background: rgba(211, 138, 29, 0.14);
+  color: #9b6b13;
 }
 
 .status-badge.confirmed {
-  background-color: #d1fae5;
-  color: #065f46;
+  background: rgba(29, 157, 116, 0.16);
+  color: #1f7255;
 }
 
 .status-badge.completed {
-  background-color: #dbeafe;
-  color: #1e40af;
+  background: rgba(24, 102, 165, 0.16);
+  color: var(--color-primary-600);
 }
 
 .status-badge.cancelled {
-  background-color: #fee2e2;
-  color: #991b1b;
+  background: rgba(197, 83, 83, 0.16);
+  color: var(--color-danger-500);
 }
 
-/* Appointment Actions */
 .appointment-actions {
   display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
   flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
 }
 
-.appointment-actions .download-btn {
-  flex: 1;
-  min-width: 160px;
-}
-
+.appointment-actions .download-btn,
 .appointment-actions .secondary-btn {
-  flex: 1;
-  min-width: 140px;
+  flex: 1 1 160px;
 }
 
-/* Loading & Empty States */
-p:where(:not(.success-banner p)) {
-  color: var(--gray-medium);
-  font-style: italic;
+.secondary-btn {
+  background: transparent;
+  border: 1px solid rgba(24, 102, 165, 0.35);
+  color: var(--color-primary-600);
+  border-radius: var(--button-radius);
+  padding-inline: var(--button-padding-inline);
+  transition: background var(--transition-fast), color var(--transition-fast),
+    transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.secondary-btn:hover,
+.secondary-btn:focus-visible {
+  background: rgba(24, 102, 165, 0.1);
+  color: var(--color-primary-700);
+  transform: translateY(-1px);
+}
+
+.download-btn {
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-secondary-600));
+  color: var(--color-text-inverse);
+  border-radius: var(--button-radius);
+  padding-inline: var(--button-padding-inline);
+  transition: transform var(--transition-fast), box-shadow var(--transition-base);
+}
+
+.download-btn:hover,
+.download-btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px rgba(15, 63, 100, 0.22);
+}
+
+.empty-state {
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-radius: var(--radius-md);
+  background: rgba(24, 102, 165, 0.06);
+  color: var(--color-text-500);
   text-align: center;
-  padding: 1rem;
+  font-style: italic;
 }
 
-/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .dashboard-container {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-container {
-    padding: 1.5rem;
-  }
-
-  .patient-dash h2 {
-    font-size: 1.6rem;
+    padding: clamp(1.5rem, 6vw, 2rem);
   }
 
   .filter-form {
@@ -350,7 +296,7 @@ p:where(:not(.success-banner p)) {
   }
 
   .filter-form button {
-    grid-column: span 1;
+    width: 100%;
   }
 
   .doctor-card-actions,
@@ -360,14 +306,19 @@ p:where(:not(.success-banner p)) {
 
   .doctor-card-actions button,
   .appointment-actions button,
+  .appointment-actions .secondary-btn,
   .appointment-actions .download-btn {
     width: 100%;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
+  .dashboard-container {
+    border-radius: var(--radius-md);
+  }
+
   .dashboard-section {
-    padding: 1rem;
+    padding: clamp(1.1rem, 5vw, 1.4rem);
   }
 
   .doctor-grid {

@@ -1,95 +1,115 @@
 .medical-card-page {
+  flex: 1;
   width: 100%;
-  min-height: 100vh;
-  padding: 2.5rem 3vw;
-  background-color: #f9fafb;
-  box-sizing: border-box;
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 3.5rem);
+  background: linear-gradient(135deg, rgba(24, 102, 165, 0.05), rgba(31, 138, 132, 0.08));
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 
 .medical-card-container {
-  width: 100%;
-  max-width: 1100px;
-  padding: 2.5rem 2rem;
-  border-radius: 18px;
-  background-color: #ffffff;
-  box-shadow: 0 18px 35px rgba(0, 48, 143, 0.12);
-  border: 1px solid #e2e8f0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
+  width: min(1100px, 100%);
+  padding: clamp(2.4rem, 4vw, 3.2rem);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid rgba(24, 102, 165, 0.12);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  animation: fade-in-up 520ms var(--transition-base) both;
 }
 
 .medical-card-container h2 {
-  text-align: left;
-  color: #00308F;
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1.9rem, 2vw + 1rem, 2.4rem);
+  color: var(--color-primary-600);
 }
 
 .medical-info p {
-  font-size: 16px;
-  margin: 6px 0;
-  color: #0f172a;
+  font-size: 1rem;
+  margin: 0.35rem 0;
+  color: var(--color-text-500);
 }
 
 .history-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.65rem;
 }
 
 .history-list li {
-  background: #eaf3ff;
-  border-radius: 10px;
+  background: rgba(24, 102, 165, 0.08);
+  border-radius: var(--radius-sm);
   padding: 0.9rem 1.1rem;
-  margin: 0.5rem 0;
-  border: 1px solid #dbeafe;
+  border: 1px solid rgba(24, 102, 165, 0.18);
+  color: var(--color-text-500);
 }
 
 .prescription-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1.1rem, 2.5vw, 1.6rem);
 }
 
 .prescription-card {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: 0 8px 18px rgba(13, 148, 136, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  background: var(--color-surface-alt);
+  border: 1px solid rgba(24, 102, 165, 0.12);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.2rem, 2.5vw, 1.6rem);
+  box-shadow: var(--shadow-xs);
+  display: grid;
+  gap: 0.55rem;
+  transition: transform var(--transition-base), box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
-.download-btn {
-  background-color: #00308F;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 14px;
+.prescription-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(24, 102, 165, 0.22);
+  box-shadow: var(--shadow-sm);
 }
 
-.download-btn:hover {
-  background-color: #0C3B2E;
+.prescription-card h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--color-text-900);
+}
+
+.prescription-card p {
+  margin: 0;
+  color: var(--color-text-500);
+  font-size: 0.95rem;
+}
+
+.prescription-card strong {
+  color: var(--color-secondary-600);
+}
+
+.medical-card-container .download-btn {
+  justify-self: flex-start;
+  margin-top: 0.35rem;
 }
 
 .error {
-  color: red;
+  color: var(--color-danger-500);
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
+  background: rgba(197, 83, 83, 0.12);
+  border: 1px solid rgba(197, 83, 83, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.1rem;
 }
 
 @media (max-width: 768px) {
   .medical-card-page {
-    padding: 2rem 1.25rem;
+    padding: clamp(1.5rem, 6vw, 2rem);
   }
 
   .medical-card-container {
-    padding: 2rem 1.5rem;
+    border-radius: var(--radius-lg);
   }
 }

@@ -1,5 +1,53 @@
-/* src/App.css */
+:root {
+  --navbar-height: 72px;
+  --footer-height: 64px;
+}
+
 .main-content {
-  min-height: calc(100vh - 120px);
-  padding-bottom: 60px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
+  padding-block: clamp(1.5rem, 2vw, 2.5rem);
+  transition: padding var(--transition-base);
+}
+
+.main-content > * {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  animation: content-fade-in 420ms var(--transition-base) both;
+}
+
+.main-content:has(.login-page),
+.main-content:has(.signup-page) {
+  min-height: calc(100vh - var(--navbar-height));
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.main-content:has(.login-page) + .footer,
+.main-content:has(.signup-page) + .footer {
+  display: none;
+}
+
+@keyframes content-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 64px;
+    --footer-height: 72px;
+  }
+
+  .main-content {
+    padding-block: 1.25rem;
+  }
 }
