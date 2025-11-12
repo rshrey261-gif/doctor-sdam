@@ -28,53 +28,67 @@ function MedicalCard() {
   }, []);
 
   if (loading)
-    return <div className="medical-card-container"><p>Loading medical data...</p></div>;
+    return (
+      <div className="medical-card-page">
+        <div className="medical-card-container">
+          <p>Loading medical data...</p>
+        </div>
+      </div>
+    );
 
   if (error)
-    return <div className="medical-card-container"><p className="error">{error}</p></div>;
+    return (
+      <div className="medical-card-page">
+        <div className="medical-card-container">
+          <p className="error">{error}</p>
+        </div>
+      </div>
+    );
 
   return (
-    <div className="medical-card-container">
-      <h2>🩺 Your Medical Card</h2>
+    <div className="medical-card-page">
+      <div className="medical-card-container">
+        <h2>🩺 Your Medical Card</h2>
 
-      {medicalCard ? (
-        <div className="medical-info">
-          <p><b>Card ID:</b> {medicalCard.id}</p>
-          <p><b>Issued On:</b> {new Date(medicalCard.createdAt).toLocaleDateString()}</p>
-        </div>
-      ) : (
-        <p>No medical card found.</p>
-      )}
+        {medicalCard ? (
+          <div className="medical-info">
+            <p><b>Card ID:</b> {medicalCard.id}</p>
+            <p><b>Issued On:</b> {new Date(medicalCard.createdAt).toLocaleDateString()}</p>
+          </div>
+        ) : (
+          <p>No medical card found.</p>
+        )}
 
-      <h3>📋 Medical History</h3>
-      {medicalCard?.medicalHistory?.length > 0 ? (
-        <ul className="history-list">
-          {medicalCard.medicalHistory.map((entry, index) => (
-            <li key={index}>
-              <b>{entry.condition}</b> — {entry.treatment} ({entry.date})
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No previous history found.</p>
-      )}
+        <h3>📋 Medical History</h3>
+        {medicalCard?.medicalHistory?.length > 0 ? (
+          <ul className="history-list">
+            {medicalCard.medicalHistory.map((entry, index) => (
+              <li key={index}>
+                <b>{entry.condition}</b> — {entry.treatment} ({entry.date})
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No previous history found.</p>
+        )}
 
-      <h3>💊 Prescriptions</h3>
-      {prescriptions.length === 0 ? (
-        <p>No prescriptions yet.</p>
-      ) : (
-        <div className="prescription-grid">
-          {prescriptions.map((p) => (
-            <div key={p._id} className="prescription-card">
-              <p><b>Doctor:</b> {p.doctorId?.userId?.name}</p>
-              <p><b>Date:</b> {new Date(p.createdAt).toLocaleDateString()}</p>
-              <a href={p.pdfLink} target="_blank" rel="noreferrer" className="download-btn">
-                Download Prescription
-              </a>
-            </div>
-          ))}
-        </div>
-      )}
+        <h3>💊 Prescriptions</h3>
+        {prescriptions.length === 0 ? (
+          <p>No prescriptions yet.</p>
+        ) : (
+          <div className="prescription-grid">
+            {prescriptions.map((p) => (
+              <div key={p._id} className="prescription-card">
+                <p><b>Doctor:</b> {p.doctorId?.userId?.name}</p>
+                <p><b>Date:</b> {new Date(p.createdAt).toLocaleDateString()}</p>
+                <a href={p.pdfLink} target="_blank" rel="noreferrer" className="download-btn">
+                  Download Prescription
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

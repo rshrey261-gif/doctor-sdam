@@ -46,35 +46,39 @@ function BookAppointment() {
   };
 
   return (
-    <div className="book-container">
-      <h2>Book Appointment with <span className="doctor-name">{doctorName}</span></h2>
+    <div className="book-page">
+      <div className="book-container">
+        <h2>
+          Book Appointment with <span className="doctor-name">{doctorName}</span>
+        </h2>
 
-      <form onSubmit={handleSubmit} className="book-form">
-        <label>Date:</label>
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          required
-          min={new Date().toISOString().split("T")[0]}
-        />
+        <form onSubmit={handleSubmit} className="book-form">
+          <label>Date:</label>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            required
+            min={new Date().toISOString().split("T")[0]}
+          />
 
-        <label>Time:</label>
-        <input
-          type="time"
-          name="time"
-          value={formData.time}
-          onChange={handleChange}
-          required
-        />
+          <label>Time:</label>
+          <input
+            type="time"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            required
+          />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Booking..." : "Confirm Booking"}
-        </button>
-      </form>
+          <button type="submit" disabled={loading}>
+            {loading ? "Booking..." : "Confirm Booking"}
+          </button>
+        </form>
 
-      {message && <p className="book-message">{message}</p>}
+        {message && <p className="book-message">{message}</p>}
+      </div>
     </div>
   );
 }

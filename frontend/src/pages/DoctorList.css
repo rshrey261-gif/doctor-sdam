@@ -1,145 +1,134 @@
-/* ✅ DASHBOARD LAYOUT */
-.dashboard-container,
+/* DoctorList.css */
+
 .doctorlist-container {
-  width: 85%;
-  margin: 40px auto;
-  padding: 20px;
-}
-
-.dashboard-container h2 {
-  color: #00308f;
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-/* ✅ DASHBOARD SECTIONS */
-.dashboard-section {
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 25px;
-}
-
-.dashboard-section h3 {
-  margin-bottom: 12px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2.5rem 3vw;
+  background-color: #f9fafb;
   color: #0c3b2e;
-}
-
-.dashboard-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.dashboard-section li {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  padding: 12px;
-}
-
-/* ✅ FILTER + SEARCH FORM */
-.filter-form,
-.search-section .filter-form {
+  box-sizing: border-box;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 25px;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.doctorlist-container h2 {
+  font-size: 2.1rem;
+  color: #00308f;
+  margin: 0;
+  text-align: left;
+}
+
+.filter-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: end;
 }
 
 .filter-form input,
-.filter-form select,
-.search-section input,
-.search-section select {
-  padding: 8px;
-  border-radius: 6px;
+.filter-form select {
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  min-width: 150px;
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ✅ FILTER BUTTON */
-.filter-form button,
-.search-section button {
+.filter-form input:focus,
+.filter-form select:focus {
+  outline: none;
+  border-color: #00308f;
+  box-shadow: 0 0 0 3px rgba(0, 48, 143, 0.15);
+}
+
+.filter-form button {
   background-color: #00308f;
-  color: white;
+  color: #ffffff;
   border: none;
-  padding: 8px 15px;
-  border-radius: 6px;
+  padding: 0.85rem 1.4rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.25s ease;
+  font-weight: 600;
+  transition: background-color 0.25s ease, transform 0.2s ease;
 }
 
-.filter-form button:hover,
-.search-section button:hover {
+.filter-form button:hover {
   background-color: #00246a;
+  transform: translateY(-1px);
 }
 
-/* ✅ DOCTOR GRID */
 .doctor-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-/* ✅ DOCTOR CARD */
 .doctor-card {
-  background-color: white;
-  padding: 22px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  text-align: center;
-  transition: 0.25s ease-in-out;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 6px 16px rgba(14, 116, 144, 0.08);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .doctor-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(14, 116, 144, 0.15);
 }
 
 .doctor-card h3 {
   color: #00308f;
+  font-size: 1.25rem;
+  margin: 0;
 }
 
 .doctor-card p {
-  margin: 6px 0;
-  font-size: 14px;
-  color: #333;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #333333;
 }
 
-/* ✅ DOCTOR CARD ACTIONS */
-.doctor-card-actions,
-.doctor-card button {
-  margin-top: 12px;
+.doctor-card p b {
+  color: #0c3b2e;
 }
 
-/* ✅ PRIMARY BUTTON */
 .doctor-card button {
+  margin-top: 0.75rem;
+  align-self: flex-start;
   background-color: #0c3b2e;
-  color: white;
+  color: #ffffff;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .doctor-card button:hover {
   background-color: #095c45;
+  transform: translateY(-1px);
 }
 
-/* ✅ SECONDARY BUTTON */
-.secondary-btn {
-  background-color: #00308f !important;
-}
+@media (max-width: 768px) {
+  .doctorlist-container {
+    padding: 2rem 1.5rem;
+  }
 
-.secondary-btn:hover {
-  background-color: #00246a !important;
-}
-
-/* ✅ Utility Text */
-.card-section p {
-  font-size: 15px;
-  color: #333;
+  .filter-form {
+    grid-template-columns: 1fr;
+  }
 }

@@ -35,13 +35,14 @@ body {
 
 /* Main Container */
 .dashboard-container {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid #e5e7eb;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 2rem 3vw;
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
 }
 
 .patient-dash h2 {
@@ -337,8 +338,7 @@ p:where(:not(.success-banner p)) {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .dashboard-container {
-    margin: 1rem;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .patient-dash h2 {

@@ -29,31 +29,33 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Login</button>
-      </form>
-      <p className="signup-link">
-        Don’t have an account? <a href="/signup">Sign up</a>
-      </p>
+    <div className="auth-page login-page">
+      <div className="login-container">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit} className="login-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          {error && <p className="error">{error}</p>}
+          <button type="submit">Login</button>
+        </form>
+        <p className="signup-link">
+          Don’t have an account? <a href="/signup">Sign up</a>
+        </p>
+      </div>
     </div>
   );
 }

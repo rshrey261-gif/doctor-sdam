@@ -33,43 +33,45 @@ function Signup() {
   };
 
   return (
-    <div className="signup-container">
-      <h2>Create an Account</h2>
-      <form onSubmit={handleSubmit} className="signup-form">
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <select name="role" value={formData.role} onChange={handleChange}>
-          <option value="patient">Patient</option>
-          <option value="doctor">Doctor</option>
-        </select>
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Sign Up</button>
-      </form>
-      <p className="login-link">
-        Already have an account? <a href="/login">Login</a>
-      </p>
+    <div className="auth-page signup-page">
+      <div className="signup-container">
+        <h2>Create an Account</h2>
+        <form onSubmit={handleSubmit} className="signup-form">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <select name="role" value={formData.role} onChange={handleChange}>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
+          {error && <p className="error">{error}</p>}
+          <button type="submit">Sign Up</button>
+        </form>
+        <p className="login-link">
+          Already have an account? <a href="/login">Login</a>
+        </p>
+      </div>
     </div>
   );
 }

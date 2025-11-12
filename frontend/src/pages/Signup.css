@@ -2,14 +2,14 @@
 
 /* Color Palette */
 :root {
-  --teal-primary: #14b8a6;        /* Teal/Blue-Green - Main Accent */
-  --white: #ffffff;              /* White */
-  --light-blue: #bfdbfe;         /* Light Blue - Buttons */
-  --darker-blue: #1e40af;        /* Darker Blue - Headings, Links */
-  --gray-light: #f3f4f6;         /* Light Gray - Backgrounds */
-  --gray-medium: #9ca3af;        /* Medium Gray - Text, borders */
-  --gray-dark: #4b5563;          /* Dark Gray - Secondary text */
-  --error-red: #ef4444;          /* Error messages */
+  --teal-primary: #14b8a6;
+  --white: #ffffff;
+  --light-blue: #bfdbfe;
+  --darker-blue: #1e40af;
+  --gray-light: #f3f4f6;
+  --gray-medium: #9ca3af;
+  --gray-dark: #4b5563;
+  --error-red: #ef4444;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -26,15 +26,21 @@
   padding: 0;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #ccfbf1 0%, #e0f2fe 100%);
+.auth-page {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--gray-dark);
+}
+
+.signup-page {
+  background: linear-gradient(135deg, #ccfbf1 0%, #e0f2fe 100%);
+  background-size: cover;
 }
 
 /* Signup Container */
@@ -103,6 +109,8 @@ body {
 /* Select Styling */
 .signup-form select {
   appearance: none;
+  -webkit-appearance: none; /* ✅ Fix for Safari */
+  -moz-appearance: none; /* ✅ Fix for Firefox */
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 1rem center;

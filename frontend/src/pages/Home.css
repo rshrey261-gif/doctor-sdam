@@ -8,7 +8,13 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2rem;
+  /* keep generous vertical spacing but allow horizontal shrink on small screens */
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 6rem 3vw;
+  position: relative; /* ensure ::before covers this container only */
+  overflow: hidden;
   color: #FFFFFF;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
